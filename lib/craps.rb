@@ -19,7 +19,7 @@ class Craps
         output.puts "'craps!' you LOSE!"
       else
         @point = dice_roll
-        puts "set point is #{@point}"
+        output.puts "set point is #{@point}"
         die1 = Die.new
         die2 = Die.new
         roll(die1, die2, false)
