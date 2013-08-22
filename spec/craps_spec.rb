@@ -108,12 +108,12 @@ describe Craps do
       expect(output).to have_received(:puts).with("you win with 9")
     end
 
-    it "wins if rolls the same as the first roll" do
+    it "rolls again if point and roll are not equal" do
       output = double('output').as_null_object
       die1 = Die.new
-      die1.stub(:roll).and_return(4)
+      die1.stub(:roll).and_return(4, 4)
       die2 = Die.new
-      die2.stub(:roll).and_return(4)
+      die2.stub(:roll).and_return(4, 5)
       craps = described_class.new(output)
       craps.instance_variable_set(:@point, 9)
 
