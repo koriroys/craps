@@ -58,5 +58,3 @@ class Player
 
   attr_accessor :output
 end
- 
-# Player.new.roll(die1, die2, true)
