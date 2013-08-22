@@ -8,9 +8,9 @@ describe Craps do
       die1.stub(:roll).and_return(3)
       die2 = Die.new
       die2.stub(:roll).and_return(4)
-      player = described_class.new(output)
+      craps = described_class.new(output)
 
-      player.roll(die1, die2, true)
+      craps.roll(die1, die2, true)
 
       expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
     end
@@ -21,9 +21,9 @@ describe Craps do
       die1.stub(:roll).and_return(3)
       die2 = Die.new
       die2.stub(:roll).and_return(4)
-      player = described_class.new(output)
+      craps = described_class.new(output)
 
-      player.roll(die1, die2, true)
+      craps.roll(die1, die2, true)
 
       expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
     end
@@ -34,9 +34,9 @@ describe Craps do
       die1.stub(:roll).and_return(1)
       die2 = Die.new
       die2.stub(:roll).and_return(1)
-      player = described_class.new(output)
+      craps = described_class.new(output)
 
-      player.roll(die1, die2, true)
+      craps.roll(die1, die2, true)
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -47,9 +47,9 @@ describe Craps do
       die1.stub(:roll).and_return(1)
       die2 = Die.new
       die2.stub(:roll).and_return(2)
-      player = described_class.new(output)
+      craps = described_class.new(output)
 
-      player.roll(die1, die2, true)
+      craps.roll(die1, die2, true)
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -60,9 +60,9 @@ describe Craps do
       die1.stub(:roll).and_return(6)
       die2 = Die.new
       die2.stub(:roll).and_return(6)
-      player = described_class.new(output)
+      craps = described_class.new(output)
 
-      player.roll(die1, die2, true)
+      craps.roll(die1, die2, true)
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
