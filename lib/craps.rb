@@ -8,19 +8,19 @@ class Craps
   def initialize(output)
     @point = nil
     @output = output
-    @playing = true
+    self.playing = true
   end
 
   def roll(die1, die2, first_roll)
-    while @playing
+    while playing?
       dice_roll = die1.roll + die2.roll
       if first_roll
         if pass(dice_roll)
           output.puts "'natural' roll, you WIN!"
-          @playing = false
+          self.playing = false
         elsif no_pass(dice_roll)
           output.puts "'craps!' you LOSE!"
-          @playing = false
+          self.playing = false
         else
           @point = dice_roll
           output.puts "set point is #{@point}"
@@ -30,10 +30,10 @@ class Craps
         output.puts "current roll is #{dice_roll}"
         if dice_roll == 7
           output.puts "you crapped out with a #{dice_roll}"
-          @playing = false
+          self.playing = false
         elsif dice_roll == @point
           output.puts "you win with #{@point}"
-          @playing = false
+          self.playing = false
         else
           output.puts "Roll again"
         end
@@ -51,5 +51,9 @@ class Craps
     dice_roll == 2 || dice_roll == 3 || dice_roll == 12
   end
 
-  attr_accessor :output
+  def playing?
+    playing
+  end
+
+  attr_accessor :output, :playing
 end
