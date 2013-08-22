@@ -1,11 +1,11 @@
 class Die
   def roll
-    rand(1..6)
+    rand 1..6
   end
 end
 
 class Craps
-  def initialize(output)
+  def initialize output
     self.point = nil
     self.output = output
     self.playing = true
@@ -54,11 +54,11 @@ class Craps
   end
 
   def roll_dice
-    dice.map(&:roll).inject(:+)
+    dice.map(&:roll).inject :+
   end
 
   def first_roll_win? dice_roll
-    (dice_roll == 7 || dice_roll == 11)
+    dice_roll == 7 || dice_roll == 11
   end
 
   def first_roll_lose? dice_roll
