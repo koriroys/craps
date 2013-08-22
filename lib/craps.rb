@@ -18,10 +18,10 @@ class Craps
       dice_roll = roll_dice
       output.puts "current roll is #{dice_roll}"
       if first_roll?
-        if pass dice_roll
+        if first_roll_win? dice_roll
           output.puts "'natural' roll, you WIN!"
           self.playing = false
-        elsif no_pass dice_roll
+        elsif first_roll_lose? dice_roll
           output.puts "'craps!' you LOSE!"
           self.playing = false
         else
@@ -57,11 +57,11 @@ class Craps
     dice.map(&:roll).inject(:+)
   end
 
-  def pass dice_roll
+  def first_roll_win? dice_roll
     (dice_roll == 7 || dice_roll == 11)
   end
 
-  def no_pass dice_roll
+  def first_roll_lose? dice_roll
     dice_roll == 2 || dice_roll == 3 || dice_roll == 12
   end
 
