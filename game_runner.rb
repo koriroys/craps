@@ -1,3 +1,3 @@
 require './lib/craps'
 
-Craps.new(STDOUT).roll(Die.new, Die.new, true)
+Craps.new(STDOUT).roll

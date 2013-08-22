@@ -9,8 +9,9 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(4)
       craps = described_class.new(output)
+      craps.stub(:dice).and_return([die1, die2])
 
-      craps.roll(die1, die2, true)
+      craps.roll
 
       expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
     end
@@ -22,8 +23,9 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(4)
       craps = described_class.new(output)
+      craps.stub(:dice).and_return([die1, die2])
 
-      craps.roll(die1, die2, true)
+      craps.roll
 
       expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
     end
@@ -35,8 +37,9 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(1)
       craps = described_class.new(output)
+      craps.stub(:dice).and_return([die1, die2])
 
-      craps.roll(die1, die2, true)
+      craps.roll
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -48,8 +51,9 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(2)
       craps = described_class.new(output)
+      craps.stub(:dice).and_return([die1, die2])
 
-      craps.roll(die1, die2, true)
+      craps.roll
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -61,8 +65,9 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(6)
       craps = described_class.new(output)
+      craps.stub(:dice).and_return([die1, die2])
 
-      craps.roll(die1, die2, true)
+      craps.roll
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -74,8 +79,9 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(5)
       craps = described_class.new(output)
+      craps.stub(:dice).and_return([die1, die2])
 
-      craps.roll(die1, die2, true)
+      craps.roll
 
       expect(craps.instance_variable_get(:@point)).to eq(9)
       expect(output).to have_received(:puts).with("set point is 9")
@@ -90,8 +96,11 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(4)
       craps = described_class.new(output)
+      craps.stub(:dice).and_return([die1, die2])
+      craps.stub(:first_roll).and_return(false)
 
-      craps.roll(die1, die2, false)
+      craps.roll
+
       expect(output).to have_received(:puts).with("you crapped out with a 7")
     end
 
@@ -103,8 +112,10 @@ describe Craps do
       die2.stub(:roll).and_return(4)
       craps = described_class.new(output)
       craps.instance_variable_set(:@point, 9)
+      craps.stub(:dice).and_return([die1, die2])
+      craps.stub(:first_roll).and_return(false)
 
-      craps.roll(die1, die2, false)
+      craps.roll
       expect(output).to have_received(:puts).with("you win with 9")
     end
 
@@ -115,9 +126,11 @@ describe Craps do
       die2 = Die.new
       die2.stub(:roll).and_return(4, 5)
       craps = described_class.new(output)
-      craps.instance_variable_set(:@point, 9)
+      craps.stub(:point).and_return(9)
+      craps.stub(:dice).and_return([die1, die2])
+      craps.stub(:first_roll).and_return(false)
 
-      craps.roll(die1, die2, false)
+      craps.roll
       expect(output).to have_received(:puts).with("Roll again")
     end
   end
