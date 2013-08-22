@@ -1,29 +1,17 @@
 require './lib/dice'
 
-class Craps
-  def initialize output
-    self.output = output
+class Turn
+  def initialize
     self.playing = true
-    self.dice = Dice.new(2)
     self.first_roll = true
   end
 
-  def game_loop
-    while playing?
-      dice.roll
-      display "current roll is #{dice_roll}"
-      roll_message = roll
-      display roll_message
-    end
+  def over?
+    !playing?
   end
 
-  private
-
-  def display message
-    output.puts message
-  end
-
-  def roll
+  def play(dice_roll)
+    self.dice_roll = dice_roll
     if first_roll?
       self.first_roll = false
       play_first_roll
@@ -65,10 +53,6 @@ class Craps
     self.point = dice_roll
   end
 
-  def dice_roll
-    dice.sum
-  end
-
   def subsequent_roll_win?
     dice_roll == point
   end
@@ -93,5 +77,39 @@ class Craps
     playing
   end
 
-  attr_accessor :output, :playing, :point, :dice, :first_roll
+  attr_accessor :playing, :point, :first_roll, :dice_roll
+end
+
+class Craps
+  def initialize output
+    self.output = output
+    self.dice = Dice.new(2)
+  end
+
+  def game_loop
+    turn = Turn.new
+    until turn.over?
+      roll_dice
+      #display "current roll is #{dice_roll}"
+      turn.dice_roll = dice_roll
+      roll_message = turn.play(dice_roll)
+      display roll_message
+    end
+  end
+
+  private
+
+  def display message
+    output.puts message
+  end
+
+  def roll_dice
+    dice.roll
+  end
+
+  def dice_roll
+    dice.sum
+  end
+
+  attr_accessor :output, :dice
 end
