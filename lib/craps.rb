@@ -33,6 +33,7 @@ class Craps
       else
         die1 = Die.new
         die2 = Die.new
+        output.puts "Roll again"
         roll(die1, die2, false)
       end
     end
