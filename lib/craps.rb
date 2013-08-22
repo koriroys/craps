@@ -1,7 +1,33 @@
 class Die
-  def roll
-    rand 1..6
+  attr_reader :value
+
+  def initialize
+    self.value = nil
   end
+
+  def roll
+    self.value = rand 1..6
+  end
+
+  private
+  attr_writer :value
+end
+
+class Dice
+  def initialize(number)
+    self.dice = Array.new number, Die.new
+  end
+
+  def roll
+    dice.each(&:roll)
+  end
+
+  def sum
+    dice.map(&:value).inject :+
+  end
+
+  private
+  attr_accessor :dice
 end
 
 class Craps
@@ -9,13 +35,13 @@ class Craps
     self.point = nil
     self.output = output
     self.playing = true
-    self.dice = [Die.new, Die.new]
+    self.dice = Dice.new(2)
     self.first_roll = true
   end
 
   def roll
     while playing?
-      self.dice_roll = roll_dice
+      dice.roll
       output.puts "current roll is #{dice_roll}"
       if first_roll?
         if first_roll_win?
@@ -45,16 +71,16 @@ class Craps
 
   private
 
+  def dice_roll
+    dice.sum
+  end
+
   def subsequent_roll_win?
     dice_roll == point
   end
 
   def subsequent_roll_lose?
     dice_roll == 7
-  end
-
-  def roll_dice
-    dice.map(&:roll).inject :+
   end
 
   def first_roll_win?
@@ -73,5 +99,5 @@ class Craps
     playing
   end
 
-  attr_accessor :output, :playing, :point, :dice, :first_roll, :dice_roll
+  attr_accessor :output, :playing, :point, :dice, :first_roll
 end
