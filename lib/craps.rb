@@ -36,7 +36,6 @@ class Craps
           @playing = false
         else
           output.puts "Roll again"
-          @playing = true
         end
       end
     end
