@@ -4,7 +4,7 @@ class Die
   end
 end
 
-class Player
+class Craps
 
   def initialize(output)
     @point = nil
