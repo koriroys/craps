@@ -11,8 +11,9 @@ first_roll = true
  
 class Player
  
-  def initialize
+  def initialize(output)
     @point = nil
+    @output = output
   end
  
   def pass dice_roll
@@ -24,15 +25,14 @@ class Player
   end
  
   def roll (die1, die2, first_roll)
- 
     dice_roll = die1.roll + die2.roll
     if first_roll
       if pass (dice_roll)
-        puts dice_roll
-        puts "'natural' roll, you WIN!"
+        output.puts dice_roll
+        output.puts "'natural' roll, you WIN!"
       elsif no_pass(dice_roll)
-        puts dice_roll
-        puts "'craps!' you LOSE!"
+        # output.puts dice_roll
+        output.puts "'craps!' you LOSE!"
       else
         @point = dice_roll
         puts "set point is #{@point}"
@@ -53,7 +53,10 @@ class Player
       end
     end
   end
+
+  private
+
+  attr_accessor :output
 end
  
- 
-Player.new.roll(die1, die2, true)
+# Player.new.roll(die1, die2, true)
