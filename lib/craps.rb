@@ -15,13 +15,13 @@ class Craps
 
   def roll
     while playing?
-      dice_roll = roll_dice
+      self.dice_roll = roll_dice
       output.puts "current roll is #{dice_roll}"
       if first_roll?
-        if first_roll_win? dice_roll
+        if first_roll_win?
           output.puts "'natural' roll, you WIN!"
           self.playing = false
-        elsif first_roll_lose? dice_roll
+        elsif first_roll_lose?
           output.puts "'craps!' you LOSE!"
           self.playing = false
         else
@@ -30,10 +30,10 @@ class Craps
         end
         self.first_roll = false
       else
-        if subsequent_roll_lose? dice_roll
+        if subsequent_roll_lose?
           output.puts "you crapped out with a #{dice_roll}"
           self.playing = false
-        elsif subsequent_roll_win? dice_roll
+        elsif subsequent_roll_win?
           output.puts "you win with #{point}"
           self.playing = false
         else
@@ -45,11 +45,11 @@ class Craps
 
   private
 
-  def subsequent_roll_win? dice_roll
+  def subsequent_roll_win?
     dice_roll == point
   end
 
-  def subsequent_roll_lose? dice_roll
+  def subsequent_roll_lose?
     dice_roll == 7
   end
 
@@ -57,11 +57,11 @@ class Craps
     dice.map(&:roll).inject :+
   end
 
-  def first_roll_win? dice_roll
+  def first_roll_win?
     dice_roll == 7 || dice_roll == 11
   end
 
-  def first_roll_lose? dice_roll
+  def first_roll_lose?
     dice_roll == 2 || dice_roll == 3 || dice_roll == 12
   end
 
@@ -73,5 +73,5 @@ class Craps
     playing
   end
 
-  attr_accessor :output, :playing, :point, :dice, :first_roll
+  attr_accessor :output, :playing, :point, :dice, :first_roll, :dice_roll
 end
