@@ -1,3 +1,3 @@
 require './lib/craps'
 
-Craps.new(STDOUT).roll
+Craps.new(STDOUT).game_loop

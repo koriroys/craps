@@ -90,7 +90,7 @@ class Craps
     turn = Turn.new
     until turn.over?
       roll_dice
-      #display "current roll is #{dice_roll}"
+      display "current roll is #{dice_roll}"
       turn.dice_roll = dice_roll
       roll_message = turn.play(dice_roll)
       display roll_message
