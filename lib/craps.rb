@@ -30,10 +30,10 @@ class Craps
         end
         self.first_roll = false
       else
-        if dice_roll == 7
+        if subsequent_roll_lose? dice_roll
           output.puts "you crapped out with a #{dice_roll}"
           self.playing = false
-        elsif dice_roll == point
+        elsif subsequent_roll_win? dice_roll
           output.puts "you win with #{point}"
           self.playing = false
         else
@@ -44,6 +44,14 @@ class Craps
   end
 
   private
+
+  def subsequent_roll_win? dice_roll
+    dice_roll == point
+  end
+
+  def subsequent_roll_lose? dice_roll
+    dice_roll == 7
+  end
 
   def roll_dice
     dice.map(&:roll).inject(:+)
