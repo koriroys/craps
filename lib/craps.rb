@@ -1,34 +1,4 @@
-class Die
-  attr_reader :value
-
-  def initialize
-    self.value = nil
-  end
-
-  def roll
-    self.value = rand 1..6
-  end
-
-  private
-  attr_writer :value
-end
-
-class Dice
-  def initialize(number)
-    self.dice = Array.new(number) { Die.new }
-  end
-
-  def roll
-    dice.each(&:roll)
-  end
-
-  def sum
-    dice.map(&:value).inject :+
-  end
-
-  private
-  attr_accessor :dice
-end
+require './lib/dice'
 
 class Craps
   def initialize output
