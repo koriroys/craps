@@ -3,12 +3,7 @@ class Die
     rand(1..6)
   end
 end
- 
-die1 = Die.new
-die2 = Die.new
-# puts dice_roll = die1.roll + die2.roll
-first_roll = true
- 
+
 class Player
  
   def initialize(output)
