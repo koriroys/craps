@@ -92,11 +92,11 @@ class Craps
   end
 
   def first_roll_win?
-    dice_roll == 7 || dice_roll == 11
+    [7, 11].include? dice_roll
   end
 
   def first_roll_lose?
-    dice_roll == 2 || dice_roll == 3 || dice_roll == 12
+    [2, 3, 12].include? dice_roll
   end
 
   def first_roll?
