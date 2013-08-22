@@ -66,7 +66,7 @@ class Craps
       not_playing
       "'craps!' you LOSE!"
     else
-      self.point = dice_roll
+      set_point
       "set point is #{point}"
     end
   end
@@ -81,6 +81,10 @@ class Craps
     else
       "Roll again"
     end
+  end
+
+  def set_point
+    self.point = dice_roll
   end
 
   def dice_roll
