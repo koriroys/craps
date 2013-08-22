@@ -15,7 +15,7 @@ end
 
 class Dice
   def initialize(number)
-    self.dice = Array.new number, Die.new
+    self.dice = Array.new(number) { Die.new }
   end
 
   def roll
