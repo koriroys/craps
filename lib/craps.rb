@@ -28,10 +28,8 @@ class Player
     dice_roll = die1.roll + die2.roll
     if first_roll
       if pass (dice_roll)
-        output.puts dice_roll
         output.puts "'natural' roll, you WIN!"
       elsif no_pass(dice_roll)
-        # output.puts dice_roll
         output.puts "'craps!' you LOSE!"
       else
         @point = dice_roll
