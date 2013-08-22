@@ -39,45 +39,49 @@ class Craps
     self.first_roll = true
   end
 
-  def play_first_roll
-    self.first_roll = false
-    if first_roll_win?
-      self.playing = false
-      output.puts "'natural' roll, you WIN!"
-    elsif first_roll_lose?
-      self.playing = false
-      output.puts "'craps!' you LOSE!"
-    else
-      self.point = dice_roll
-      output.puts "set point is #{point}"
-    end
-  end
-
-  def play_subsequent_roll
-    if subsequent_roll_lose?
-      self.playing = false
-      output.puts "you crapped out with a #{dice_roll}"
-    elsif subsequent_roll_win?
-      self.playing = false
-      output.puts "you win with #{point}"
-    else
-      output.puts "Roll again"
-    end
-  end
-
   def roll
     while playing?
       dice.roll
       output.puts "current roll is #{dice_roll}"
       if first_roll?
-        play_first_roll
+        output.puts play_first_roll
       else
-        play_subsequent_roll
+        output.puts play_subsequent_roll
       end
     end
   end
 
   private
+
+  def not_playing
+    self.playing = false
+  end
+
+  def play_first_roll
+    self.first_roll = false
+    if first_roll_win?
+      not_playing
+      "'natural' roll, you WIN!"
+    elsif first_roll_lose?
+      not_playing
+      "'craps!' you LOSE!"
+    else
+      self.point = dice_roll
+      "set point is #{point}"
+    end
+  end
+
+  def play_subsequent_roll
+    if subsequent_roll_lose?
+      not_playing
+      "you crapped out with a #{dice_roll}"
+    elsif subsequent_roll_win?
+      not_playing
+      "you win with #{point}"
+    else
+      "Roll again"
+    end
+  end
 
   def dice_roll
     dice.sum
