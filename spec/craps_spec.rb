@@ -1,29 +1,70 @@
 require 'craps'
 
 describe Craps do
-  it "wins if rolls a 7 on the first roll" do
-    output = double('output').as_null_object
-    die1 = Die.new
-    die1.stub(:roll).and_return(3)
-    die2 = Die.new
-    die2.stub(:roll).and_return(4)
-    player = described_class.new(output)
+  describe "first roll" do
+    it "wins if rolls a 7" do
+      output = double('output').as_null_object
+      die1 = Die.new
+      die1.stub(:roll).and_return(3)
+      die2 = Die.new
+      die2.stub(:roll).and_return(4)
+      player = described_class.new(output)
 
-    player.roll(die1, die2, true)
+      player.roll(die1, die2, true)
 
-    expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
-  end
+      expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
+    end
 
-  it "loses if rolls a 3 on the first roll" do
-    output = double('output').as_null_object
-    die1 = Die.new
-    die1.stub(:roll).and_return(1)
-    die2 = Die.new
-    die2.stub(:roll).and_return(2)
-    player = described_class.new(output)
+    it "wins if rolls a 11" do
+      output = double('output').as_null_object
+      die1 = Die.new
+      die1.stub(:roll).and_return(3)
+      die2 = Die.new
+      die2.stub(:roll).and_return(4)
+      player = described_class.new(output)
 
-    player.roll(die1, die2, true)
+      player.roll(die1, die2, true)
 
-    expect(output).to have_received(:puts).with("'craps!' you LOSE!")
+      expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
+    end
+
+    it "loses if rolls a 2" do
+      output = double('output').as_null_object
+      die1 = Die.new
+      die1.stub(:roll).and_return(1)
+      die2 = Die.new
+      die2.stub(:roll).and_return(1)
+      player = described_class.new(output)
+
+      player.roll(die1, die2, true)
+
+      expect(output).to have_received(:puts).with("'craps!' you LOSE!")
+    end
+
+    it "loses if rolls a 3" do
+      output = double('output').as_null_object
+      die1 = Die.new
+      die1.stub(:roll).and_return(1)
+      die2 = Die.new
+      die2.stub(:roll).and_return(2)
+      player = described_class.new(output)
+
+      player.roll(die1, die2, true)
+
+      expect(output).to have_received(:puts).with("'craps!' you LOSE!")
+    end
+
+    it "loses if rolls a 12" do
+      output = double('output').as_null_object
+      die1 = Die.new
+      die1.stub(:roll).and_return(6)
+      die2 = Die.new
+      die2.stub(:roll).and_return(6)
+      player = described_class.new(output)
+
+      player.roll(die1, die2, true)
+
+      expect(output).to have_received(:puts).with("'craps!' you LOSE!")
+    end
   end
 end
