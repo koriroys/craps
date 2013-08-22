@@ -2,33 +2,36 @@ require './lib/dice'
 
 class Craps
   def initialize output
-    self.point = nil
     self.output = output
     self.playing = true
     self.dice = Dice.new(2)
     self.first_roll = true
   end
 
-  def roll
+  def game_loop
     while playing?
       dice.roll
       output.puts "current roll is #{dice_roll}"
-      if first_roll?
-        output.puts play_first_roll
-      else
-        output.puts play_subsequent_roll
-      end
+      output.puts roll
     end
   end
 
   private
+
+  def roll
+    if first_roll?
+      self.first_roll = false
+      play_first_roll
+    else
+      play_subsequent_roll
+    end
+  end
 
   def not_playing
     self.playing = false
   end
 
   def play_first_roll
-    self.first_roll = false
     if first_roll_win?
       not_playing
       "'natural' roll, you WIN!"

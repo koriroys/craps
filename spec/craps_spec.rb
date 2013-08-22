@@ -9,7 +9,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(7)
       craps.stub(:dice_roll).and_return(7)
 
-      craps.roll
+      craps.game_loop
 
       expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
     end
@@ -19,7 +19,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(11)
       craps.stub(:dice_roll).and_return(11)
 
-      craps.roll
+      craps.game_loop
 
       expect(output).to have_received(:puts).with("'natural' roll, you WIN!")
     end
@@ -29,7 +29,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(2)
       craps.stub(:dice_roll).and_return(2)
 
-      craps.roll
+      craps.game_loop
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -39,7 +39,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(3)
       craps.stub(:dice_roll).and_return(3)
 
-      craps.roll
+      craps.game_loop
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -49,7 +49,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(12)
       craps.stub(:dice_roll).and_return(12)
 
-      craps.roll
+      craps.game_loop
 
       expect(output).to have_received(:puts).with("'craps!' you LOSE!")
     end
@@ -59,7 +59,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(9)
       craps.stub(:dice_roll).and_return(9)
 
-      craps.roll
+      craps.game_loop
 
       expect(craps.send(:point)).to eq(9)
       expect(output).to have_received(:puts).with("set point is 9")
@@ -77,7 +77,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(7)
       craps.stub(:dice_roll).and_return(7)
 
-      craps.roll
+      craps.game_loop
 
       expect(output).to have_received(:puts).with("you crapped out with a 7")
     end
@@ -87,7 +87,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(9)
       craps.stub(:dice_roll).and_return(9)
 
-      craps.roll
+      craps.game_loop
       expect(output).to have_received(:puts).with("you win with 9")
     end
 
@@ -96,7 +96,7 @@ describe Craps do
       craps.stub_chain(:dice, :roll).and_return(9)
       craps.stub(:dice_roll).and_return(9)
 
-      craps.roll
+      craps.game_loop
       expect(output).to have_received(:puts).with("Roll again")
     end
   end
