@@ -11,12 +11,17 @@ class Craps
   def game_loop
     while playing?
       dice.roll
-      output.puts "current roll is #{dice_roll}"
-      output.puts roll
+      display "current roll is #{dice_roll}"
+      roll_message = roll
+      display roll_message
     end
   end
 
   private
+
+  def display message
+    output.puts message
+  end
 
   def roll
     if first_roll?
