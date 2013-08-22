@@ -81,4 +81,31 @@ describe Craps do
       expect(output).to have_received(:puts).with("set point is 9")
     end
   end
+
+  describe "second roll" do
+    it "loses if rolls a 7" do
+      output = double('output').as_null_object
+      die1 = Die.new
+      die1.stub(:roll).and_return(3)
+      die2 = Die.new
+      die2.stub(:roll).and_return(4)
+      craps = described_class.new(output)
+
+      craps.roll(die1, die2, false)
+      expect(output).to have_received(:puts).with("you crapped out with a 7")
+    end
+
+    it "wins if rolls the same as the first roll" do
+      output = double('output').as_null_object
+      die1 = Die.new
+      die1.stub(:roll).and_return(5)
+      die2 = Die.new
+      die2.stub(:roll).and_return(4)
+      craps = described_class.new(output)
+      craps.instance_variable_set(:@point, 9)
+
+      craps.roll(die1, die2, false)
+      expect(output).to have_received(:puts).with("you win with 9")
+    end
+  end
 end
